@@ -1,13 +1,14 @@
 import cv2
 import os
-num_cams = 1
+num_cams = 1 # choose number of cameras
 vid_caps = []
+# Enter your camera IP addresses here
 cam_ip_addr = ['http://10.143.10.97:4747/video', 
                'http://10.143.10.207:4747/video'
 ]
 outs = []
 ws_path = os.getcwd()
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 
 for i in range(num_cams):
     cap = cv2.VideoCapture(cam_ip_addr[i])
@@ -15,7 +16,7 @@ for i in range(num_cams):
     vid_caps.append(cap)
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    output_path = ws_path+"/media/output_cam"f"{i+1}.avi"
+    output_path = ws_path+"/media/output_cam"f"{i+1}.mp4"
     print(output_path)
     out = cv2.VideoWriter(output_path, fourcc, 20.0, (frame_width, frame_height))
     outs.append(out)
